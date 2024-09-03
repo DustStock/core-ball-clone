@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bupsm2jk3clwq"]
+
+[ext_resource type="Script" path="res://tiny_balls.gd" id="1_fbe5l"]
+[ext_resource type="Texture2D" uid="uid://dfrde1vga730s" path="res://transparent-circle.png" id="1_npxb2"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_1cfov"]
+size = Vector2(40, 40)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dgtbn"]
+radius = 13.0
+
+[node name="TinyBalls" type="Node2D"]
+script = ExtResource("1_fbe5l")
+
+[node name="Ball" type="Node2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ball"]
+mesh = SubResource("QuadMesh_1cfov")
+texture = ExtResource("1_npxb2")
+
+[node name="Area2D" type="Area2D" parent="Ball"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball/Area2D"]
+shape = SubResource("CircleShape2D_dgtbn")
+
+[node name="Sparkles" type="CPUParticles2D" parent="Ball"]
+emitting = false
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 118.06
+scale_amount_max = 10.0
+
+[connection signal="area_entered" from="Ball/Area2D" to="." method="lost"]

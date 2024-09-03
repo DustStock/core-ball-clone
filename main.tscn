@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfkyqpfjrwn1a"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_52vuq"]
+[ext_resource type="PackedScene" uid="uid://du3leglw2t4m6" path="res://center_ball.tscn" id="1_c52wk"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_52vuq")
+
+[node name="background" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(10, 10)
+offset_left = -568.0
+offset_top = -336.0
+offset_right = 578.0
+offset_bottom = 328.0
+color = Color(0, 0, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CenterBall" parent="." instance=ExtResource("1_c52wk")]
+
+[node name="GoalText" type="RichTextLabel" parent="."]
+offset_left = -527.0
+offset_top = -302.0
+offset_right = -199.0
+offset_bottom = -202.0
+bbcode_enabled = true
+text = "[font_size=36][color=white]Balls: 0[/color][/font_size]"
+
+[node name="CelebrationTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="CelebrationTimer" to="." method="advance_level"]
